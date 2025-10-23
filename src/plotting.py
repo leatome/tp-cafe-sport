@@ -22,3 +22,24 @@ def plot_univariate_regression(df_sport: pd.DataFrame, activite: str, slope: flo
     out_path.parent.mkdir(parents=True, exist_ok=True)
     plt.savefig(out_path, dpi=160, bbox_inches="tight")
     plt.close()
+
+
+def plot_coffee_regression(df_work: pd.DataFrame, slope: float, intercept: float, out_path: Path):
+    """Scatter productivite vs tasses_cafe and draw regression line, save PNG."""
+    x = df_work["tasses_cafe"].to_numpy()
+    y = df_work["productivite"].to_numpy()
+
+    plt.figure()
+    plt.scatter(x, y, s=25, color="blue")
+    if x.size > 0:
+        x_line = np.linspace(x.min(), x.max(), 100)
+    else:
+        x_line = np.linspace(0, 6, 2)
+    y_line = slope * x_line + intercept
+    plt.plot(x_line, y_line, color="red")
+    plt.xlabel("Tasses de café")
+    plt.ylabel("Productivité")
+    plt.title("Productivité vs Tasses de café (0–6)")
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    plt.savefig(out_path, dpi=160, bbox_inches="tight")
+    plt.close()
