@@ -58,6 +58,8 @@ Thumbs.db
 # Data files (keep CSVs tracked for this repo) - do NOT ignore data/
 # If you want to ignore large raw datasets, add them here explicitly
 
+/outputs/
+
 # Allow local config files
 *.local
 
