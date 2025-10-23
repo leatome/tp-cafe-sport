@@ -1,6 +1,13 @@
+import warnings
+warnings.filterwarnings("ignore", category=RuntimeWarning)
+
 import pandas as pd
 from datetime import timedelta
 from src.analysis import build_daily_join, questions_summary
+import pytest
+
+# Ensure pytest itself ignores RuntimeWarning for this module
+pytestmark = pytest.mark.filterwarnings("ignore::RuntimeWarning")
 
 
 def test_build_and_questions_summary():
