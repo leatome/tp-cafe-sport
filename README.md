@@ -258,3 +258,26 @@ l’énergie dépensée augmente linéairement avec la durée d’exercice, et l
 
 ---
 
+## Questions et réponses
+
+**Les jours où les individus font du sport intense, boivent-ils plus de café le lendemain ?**
+Oui, après un sport intense, ils boivent légèrement plus de café le lendemain.
+
+**Les individus actifs sont-ils plus productifs ?**
+Oui, les individus actifs sont en moyenne plus productifs.
+
+**Trop de café et trop de sport → baisse de productivité ?**
+Oui, un excès de café ou de sport finit par faire baisser la productivité.
+
+**Y a-t-il un équilibre entre “heures_travail + durée_sport” et la productivité ?**
+Oui, un équilibre existe entre le temps de travail et la durée de sport pour une productivité optimale.
+
+**Y a-t-il une corrélation entre calories et tasses de café ?**
+Oui, il existe une corrélation modérée entre calories dépensées et tasses de café consommées.
+
+**Les individus les plus sportifs consomment-ils en moyenne plus de café ?**
+Oui, les personnes les plus sportives consomment en moyenne un peu plus de café.
+
+---
+
+
