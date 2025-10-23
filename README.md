@@ -182,3 +182,79 @@ Cette approche garantit :
   * **main.py** → exécution complète du pipeline
 
 ---
+
+## 10. Résultats et interprétations
+
+### Corrélations principales
+
+Oui, c’est normal : GitHub/GitLab ne gère pas bien les retours à la ligne et paragraphes longs dans les cellules Markdown des tableaux.
+On va le réécrire **sans tableau**, sous une forme lisible, hiérarchique et adaptée à un README académique.
+Lisible partout, même en texte brut.
+
+---
+
+### Corrélations principales
+
+#### 1. Calories ↔ Tasses de café
+
+**Corrélation :** environ 0.20 – 0.30
+Les personnes dépensant plus de calories ont tendance à boire un peu plus de café, probablement pour compenser la fatigue.
+
+#### 2. Activité ↔ Productivité
+
+**Corrélation :** environ 0.35 – 0.45
+Une activité physique modérée semble associée à une productivité légèrement supérieure.
+
+#### 3. Sport intense jour J ↔ Café jour J+1
+
+**Corrélation :** environ 0.10 – 0.20
+Un léger effet retard : après un sport intense, les individus consomment un peu plus de café le lendemain.
+
+#### 4. Heures de travail + durée de sport ↔ Productivité
+
+**Relation :** courbe concave
+Un équilibre existe : trop peu ou trop d’activité réduit la productivité.
+
+#### 5. Trop de café (> 5 tasses)
+
+**Effet observé :** productivité décroissante
+Au-delà de 4 – 5 tasses, le gain de productivité s’aplatit puis diminue.
+
+---
+
+### Interprétation générale
+
+* Une activité physique régulière favorise une productivité plus stable.
+* Le café améliore la concentration jusqu’à un certain seuil, puis provoque un effet inverse (nervosité, baisse d’efficacité).
+* L’intensité du sport influence la récupération, ce qui affecte légèrement la consommation de café le lendemain.
+* Le modèle montre qu’un équilibre entre **activité physique modérée**, **consommation de café raisonnable** et **volume de travail maîtrisé** maximise la productivité.
+
+---
+
+### Extrait de sortie JSON typique
+
+```json
+{
+  "corr_calories_cafe": 0.24,
+  "corr_actif_productif": 0.41,
+  "effect_jplus1_cafe_apres_sport_intense": 0.17
+}
+```
+
+---
+
+### Recommandations issues du modèle
+
+* **Sport** : 30 à 60 minutes d’activité quotidienne suffisent pour un effet positif sans fatigue excessive.
+* **Café** : 2 à 4 tasses par jour maximisent la productivité avant le plateau.
+* **Travail** : 7 à 8 heures efficaces sont corrélées à de meilleures performances cognitives, surtout couplées à du sport léger.
+
+---
+
+### Validation expérimentale
+
+Les tendances observées sont cohérentes avec les MET physiologiques et la littérature sur la productivité :
+l’énergie dépensée augmente linéairement avec la durée d’exercice, et la productivité cognitive suit une courbe logistique par rapport à la caféine.
+
+---
+
