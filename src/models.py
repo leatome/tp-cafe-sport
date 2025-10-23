@@ -37,3 +37,20 @@ def fit_multivariate_by_activity(df_sport: pd.DataFrame, activite: str):
     coef, *_ = np.linalg.lstsq(X, y, rcond=None)
     a, b, c = coef
     return float(a), float(b), float(c)
+
+
+def fit_coffee_linear_0_6(df_work: pd.DataFrame):
+    """Fit linear model productivite = slope * tasses_cafe + intercept for tasses in [0,6].
+
+    Returns (slope, intercept) as floats. Raises ValueError if no matching rows.
+    """
+    sub = df_work[(df_work["tasses_cafe"] >= 0) & (df_work["tasses_cafe"] <= 6)]
+    if sub.empty:
+        raise ValueError("Aucune donnée café sur [0,6]")
+
+    x = sub["tasses_cafe"].to_numpy()
+    y = sub["productivite"].to_numpy()
+
+    slope, intercept = np.polyfit(x, y, 1)
+
+    return float(slope), float(intercept)
