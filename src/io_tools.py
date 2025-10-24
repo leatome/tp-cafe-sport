@@ -44,6 +44,22 @@ def load_datasets(data_dir: Path):
     if "date" in sport.columns:
         sport["date"] = pd.to_datetime(sport["date"], errors="coerce")
 
+    # Harmonisation des libellés d'activité
+    sport["activite"] = (
+        sport["activite"]
+        .astype(str)
+        .str.strip()
+        .str.lower()
+        .str.normalize("NFKD")
+        .str.encode("ascii", errors="ignore")
+        .str.decode("utf-8")
+        .replace({
+            "cours": "course",
+            "velò": "velo",
+            "vélo": "velo"
+        })
+    )
+    
     rename_work = {
         "hours_work": "heures_travail",
         "coffee_cups": "tasses_cafe",

@@ -27,6 +27,15 @@ if __name__ == "__main__":
         plot_univariate_regression(df_sport, act, slope, intercept, out)
         print(f"[SPORT] {act}: slope={slope:.2f}, intercept={intercept:.2f}")
 
+    # --- 2.b Régressions sport multivariées ---
+    from src.plotting import plot_multivariate_regression
+
+    for act in df_sport["activite"].unique():
+        a, b, c = fit_multivariate_by_activity(df_sport, act)
+        out_3d = OUTPUT_DIR / f"plot_sport_multivar_{act}.png"
+        plot_multivariate_regression(df_sport, act, a, b, c, out_3d)
+        print(f"[SPORT MULTIVARIÉ] {act}: a={a:.2f}, b={b:.2f}, c={c:.2f}")
+
     # --- 3. Régression café ---
     slope_cafe, intercept_cafe = fit_coffee_linear_0_6(df_work)
     out_cafe = OUTPUT_DIR / "plot_coffee.png"

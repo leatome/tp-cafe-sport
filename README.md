@@ -48,6 +48,7 @@ tp-cafe-sport/
 │
 ├── outputs/                   # Résultats générés automatiquement
 │   ├── plot_sport_*.png
+|   ├── plot_sport_multivar_*.png
 │   ├── plot_coffee.png
 │   └── summary.json
 │
@@ -60,19 +61,18 @@ tp-cafe-sport/
 
 ## 3. Installation
 
-### Étape 1 : Créer un environnement virtuel
-
-```bash
+Windows
+```
 python -m venv .venv
-source .venv/bin/activate  # macOS / Linux
-# ou
-.venv\Scripts\activate      # Windows
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
 ```
 
-### Étape 2 : Installer les dépendances
-
-```bash
-pip install -r requirements.txt
+MacOS / Linux
+```
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -r requirements.txt
 ```
 
 ---
@@ -83,8 +83,14 @@ pip install -r requirements.txt
 
 Tous les modules sont testés avec **pytest** :
 
+Windows
 ```bash
-pytest -q
+.\.venv\Scripts\python -m pytest -q
+```
+
+MacOS / Linux
+```bash
+.venv/bin/python -m pytest -q
 ```
 
 Résultat attendu :
@@ -95,17 +101,24 @@ Résultat attendu :
 
 ### Exécuter le pipeline complet
 
+Windows
 ```bash
-python -m src.main
+.\.venv\Scripts\python -m src.main
+```
+
+MacOS / Linux
+```bash
+.venv/bin/python -m src.main
 ```
 
 Résultats générés dans `outputs/` :
 
-| Fichier            | Description                                          |
-| ------------------ | ---------------------------------------------------- |
-| `plot_sport_*.png` | Régression calories/durée pour chaque activité       |
-| `plot_coffee.png`  | Régression productivité/tasses de café               |
-| `summary.json`     | Corrélations et effets (sport ↔ café ↔ productivité) |
+| Fichier                     | Description                                          |
+| --------------------------- | -----------------------------------------------------|
+| `plot_sport_*.png`          | Régression calories/durée pour chaque activité       |
+| `plot_sport_multivar_*.png` | Régression multivariée pour chaque activité          |
+| `plot_coffee.png`           | Régression productivité/tasses de café               |
+| `summary.json`              | Corrélations et effets (sport ↔ café ↔ productivité) |
 
 ---
 
@@ -144,9 +157,9 @@ Effet décroissant observé après 4–5 tasses.
 
 ```json
 {
-  "corr_calories_cafe": 0.23,
-  "corr_actif_productif": 0.41,
-  "effect_jplus1_cafe_apres_sport_intense": 0.18
+  "corr_calories_cafe": 0.01,
+  "corr_actif_productif": 0.03,
+  "effect_jplus1_cafe_apres_sport_intense": 0.01
 }
 ```
 
@@ -197,37 +210,38 @@ Lisible partout, même en texte brut.
 
 #### 1. Calories ↔ Tasses de café
 
-**Corrélation :** environ 0.20 – 0.30
-Les personnes dépensant plus de calories ont tendance à boire un peu plus de café, probablement pour compenser la fatigue.
+**Corrélation :** environ 0.01
+Aucune relation n'est significative, la dépense énergétique n'a pas l'air d'avoir une grande influence du à la consommation de café.
 
 #### 2. Activité ↔ Productivité
 
-**Corrélation :** environ 0.35 – 0.45
-Une activité physique modérée semble associée à une productivité légèrement supérieure.
+**Corrélation :** environ 0.03
+Les individus actifs ne sont pas significativement plus productifs dans cet échantillon.
 
 #### 3. Sport intense jour J ↔ Café jour J+1
 
-**Corrélation :** environ 0.10 – 0.20
-Un léger effet retard : après un sport intense, les individus consomment un peu plus de café le lendemain.
+**Corrélation :** environ 0.01
+Aucun effet notable : faire du sport intense ne semble pas augmenter la consommation de café le lendemain.
 
 #### 4. Heures de travail + durée de sport ↔ Productivité
 
-**Relation :** courbe concave
-Un équilibre existe : trop peu ou trop d’activité réduit la productivité.
+**Relation :**
+Aucun équilibre clair observé dans les données simulées.
 
 #### 5. Trop de café (> 5 tasses)
 
-**Effet observé :** productivité décroissante
-Au-delà de 4 – 5 tasses, le gain de productivité s’aplatit puis diminue.
+**Effet observé :** productivité stable ou légèremnt décroissante
+Au-delà de 3 – 6 tasses, le gain de productivité semble plafonner.
 
 ---
 
 ### Interprétation générale
 
-* Une activité physique régulière favorise une productivité plus stable.
-* Le café améliore la concentration jusqu’à un certain seuil, puis provoque un effet inverse (nervosité, baisse d’efficacité).
-* L’intensité du sport influence la récupération, ce qui affecte légèrement la consommation de café le lendemain.
-* Le modèle montre qu’un équilibre entre **activité physique modérée**, **consommation de café raisonnable** et **volume de travail maîtrisé** maximise la productivité.
+* Les modèles de régression fonctionnent bien individuellement (sport vs calories, café vs productivité).
+* Cependant, les corrélations croisées entre sport, café et productivité sont quasi nulles (0.01–0.03).
+* Cela montre que dans ces données simulées, les comportements sont indépendants :
+ - faire du sport n’influence pas la productivité
+ - la consommation de café n’est pas liée à l’activité physique
 
 ---
 
@@ -235,9 +249,9 @@ Au-delà de 4 – 5 tasses, le gain de productivité s’aplatit puis diminue.
 
 ```json
 {
-  "corr_calories_cafe": 0.24,
-  "corr_actif_productif": 0.41,
-  "effect_jplus1_cafe_apres_sport_intense": 0.17
+  "corr_calories_cafe": 0.0119,
+  "corr_actif_productif": 0.0317,
+  "effect_jplus1_cafe_apres_sport_intense": 0.0142
 }
 ```
 
@@ -245,39 +259,38 @@ Au-delà de 4 – 5 tasses, le gain de productivité s’aplatit puis diminue.
 
 ### Recommandations issues du modèle
 
-* **Sport** : 30 à 60 minutes d’activité quotidienne suffisent pour un effet positif sans fatigue excessive.
-* **Café** : 2 à 4 tasses par jour maximisent la productivité avant le plateau.
-* **Travail** : 7 à 8 heures efficaces sont corrélées à de meilleures performances cognitives, surtout couplées à du sport léger.
+* **Sport** : la relation calories vs durée est bien modélisée, les pentes sont cohérentes avec les METs.
+* **Café** : 3 à 6 tasses par jour croît légèrement la productivité avant le plateau.
+* **Interactions** : aucune corrélation marquée entre sport, café et productivité globale.
 
 ---
 
 ### Validation expérimentale
 
-Les tendances observées sont cohérentes avec les MET physiologiques et la littérature sur la productivité :
-l’énergie dépensée augmente linéairement avec la durée d’exercice, et la productivité cognitive suit une courbe logistique par rapport à la caféine.
+Les tendances internes (calories vs durée, café vs productivité) sont cohérentes avec les équations de départ,
+mais les corrélations inter-domaines sont trop faibles pour conclure à des relations réelles.
+C'est ce qui est attendu dans des données simulées avec bruit aléatoire.
 
 ---
 
 ## Questions et réponses
 
 **Les jours où les individus font du sport intense, boivent-ils plus de café le lendemain ?**
-Oui, après un sport intense, ils boivent légèrement plus de café le lendemain.
+Non, la corrélation est très faible (~0.01).
 
 **Les individus actifs sont-ils plus productifs ?**
-Oui, les individus actifs sont en moyenne plus productifs.
+Non, la corrélation est quasi nulle donc pas vraiment plus productif (~0.03).
 
 **Trop de café et trop de sport → baisse de productivité ?**
-Oui, un excès de café ou de sport finit par faire baisser la productivité.
+Ce n'est pas observé de manière significative.
 
 **Y a-t-il un équilibre entre “heures_travail + durée_sport” et la productivité ?**
-Oui, un équilibre existe entre le temps de travail et la durée de sport pour une productivité optimale.
+L'échantillon est trop petit pour pouvoir l'affirmer.
 
 **Y a-t-il une corrélation entre calories et tasses de café ?**
-Oui, il existe une corrélation modérée entre calories dépensées et tasses de café consommées.
+Non, elle est quasi inexistante (~0.01).
 
 **Les individus les plus sportifs consomment-ils en moyenne plus de café ?**
-Oui, les personnes les plus sportives consomment en moyenne un peu plus de café.
+Aucune tendance nette n'a pu être obersvé.
 
 ---
-
-
